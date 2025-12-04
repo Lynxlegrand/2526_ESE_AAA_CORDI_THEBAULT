@@ -10,7 +10,7 @@ A partir d'un hacheur complet et d'une carte Nucleo-STM32G474RE on a 3 séances 
 - Faire l'acquisition des différents capteurs
 - Réaliser l'asservissement en temps réel
 
-## Sommaire
+## 1.2 Sommaire
 
 
 - [1. 2526_ESE_AAA_CORDI_THEBAULT](#1-2526_ese_aaa_cordi_thebault)
@@ -24,5 +24,7 @@ A partir d'un hacheur complet et d'une carte Nucleo-STM32G474RE on a 3 séances 
     - [1.4.1 Commande de la vitesse](#131-commande-de-la-vitesse)
     - [1.4.2 Mesure de courant](#132-mesure-de-courant)
     - [1.4.3 Mesure de vitesse](#133-mesure-de-vitesse)
+
+
 
 
