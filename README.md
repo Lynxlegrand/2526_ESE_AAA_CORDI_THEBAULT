@@ -32,7 +32,8 @@ A partir d'un hacheur complet et d'une carte Nucleo-STM32G474RE on a 3 séances 
 Générer quatre PWM sur les bras de pont U et V pour controler le hacheur à partir du timer déjà attribué sur ces pins.
 
 Cahier des charges :
-- Fréquence de la PWM : 20kHz ➡ TIM_1 à 170 kHz donc met PSC = 1 et ARR = 8500
+- Fréquence de la PWM : 20kHz ➡ TIM_1 à 170 kHz donc met PSC = 1 et ARR = 8500 or on passe en center aligned donc met dans l'ioc ARR=4250-1
+![timconf](./IMG/timConf.png)
 - Temps mort minimum : à voir selon la datasheet des transistors
   - Dans le datasheet des transistors on prend le pire cas entre rise time et delay time / fall time and delay time / recover time
     ![mosfet](./IMG/datasheet%20IRF540N.png) 
@@ -41,7 +42,7 @@ Cahier des charges :
     ![DTG](./IMG/DTG%20registers.png)
     - 230 ns étant très petit on se place au DTG avec le bit de poids fort à 0 donc on a la formule $DT =DTG\times t_{tim1}$ donc $DTG = \dfrac{230}{5.88}=39$ = `0x27`
     ![dtgioc](./IMG/dtioc.png)
-- Résolution minimum : 10bits ➡ 1024-1 or notre ARR est à 8500.
+- Résolution minimum : 10bits ➡ 1024-1 or notre ARR est à 4500.
 Pour les tests, fixer le rapport cyclique à 60%.
 Une fois les PWM générées, les afficher sur un oscilloscope et les faire vérifier par votre professeur.
 
