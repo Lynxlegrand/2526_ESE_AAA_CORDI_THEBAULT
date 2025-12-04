@@ -58,3 +58,14 @@ Où :
 - `11` ➡ `CH2N`
 
 On retouve bien une commande complémentaire décalée 
+
+## 1.3.2 commande de vitesse
+
+## 1.3.3 Premiers tests
+
+- On test via notre shell en passant de 50% à 55% puis 60%, le moteur tourne dans un sens
+- Puis on revient progressivement à 50%, et on passe à 40% aussi progressivement et le moteur tourne bien dans l'autre sens 
+
+![TestPWMMotors](./IMG/TESTPWMMOTOR.jpeg)
+
+- On envoie que 2 A max
