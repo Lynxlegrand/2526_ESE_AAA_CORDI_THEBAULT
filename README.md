@@ -43,7 +43,18 @@ Cahier des charges :
     - 230 ns étant très petit on se place au DTG avec le bit de poids fort à 0 donc on a la formule $DT =DTG\times t_{tim1}$ donc $DTG = \dfrac{230}{5.88}=39$ = `0x27`
     ![dtgioc](./IMG/dtioc.png)
 - Résolution minimum : 10bits ➡ 1024-1 or notre ARR est à 4500.
-Pour les tests, fixer le rapport cyclique à 60%.
-Une fois les PWM générées, les afficher sur un oscilloscope et les faire vérifier par votre professeur.
+Pour les tests, on fixe le rapport cyclique à 60% via 
+```c
+code motor
+```
 
+Une fois les PWM générées, on les affiche sur un oscilloscope :
+![4PWM](./IMG/4PWM.png)
 
+Où :
+- `8` ➡ `CH1`
+- `9` ➡ `CH1N`
+- `10` ➡ `CH2`
+- `11` ➡ `CH2N`
+
+On retouve bien une commande complémentaire décalée 
