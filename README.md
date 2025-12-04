@@ -32,7 +32,7 @@ A partir d'un hacheur complet et d'une carte Nucleo-STM32G474RE on a 3 séances 
 Générer quatre PWM sur les bras de pont U et V pour controler le hacheur à partir du timer déjà attribué sur ces pins.
 
 Cahier des charges :
-- Fréquence de la PWM : 20kHz ➡ TIM_1 à 170 kHz donc met PSC = 1 et ARR = 8500 or on passe en center aligned donc met dans l'ioc ARR=4250-1
+- Fréquence de la PWM : 20kHz ➡ TIM_1 à 170 kHz donc met PSC = 1 et ARR = 8500 or on passe en center aligned en mode 3 donc met dans l'ioc ARR=4250-1
 ![timconf](./IMG/timConf.png)
 - Temps mort minimum : à voir selon la datasheet des transistors
   - Dans le datasheet des transistors on prend le pire cas entre rise time et delay time / fall time and delay time / recover time
