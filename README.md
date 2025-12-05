@@ -40,7 +40,7 @@ Cahier des charges :
     - Le recover time est le plus long et on le prend x2 comme sécurité donc $t_{DT}=230 ns$
   - Ensuite on le configure dans l'ioc via les bits DTG[7:0] du timer1
     ![DTG](./IMG/DTG%20registers.png)
-    - 230 ns étant très petit on se place au DTG avec le bit de poids fort à 0 donc on a la formule $DT =DTG\times t_{tim1}$ donc $DTG = \dfrac{230}{5.88}=39$ = `0x27`
+    - 230 ns étant très petit on se place au DTG avec le bit de poids fort à 0 donc on a la formule $\boxed{DT =DTG\times t_{tim1}}$ donc $DTG = \dfrac{230}{5.88}=39$ = `0x27`
     ![dtgioc](./IMG/dtioc.png)
 - Résolution minimum : 10bits ➡ 1024-1 or notre ARR est à 4500.
 Pour les tests, on fixe le rapport cyclique à 60% via 
