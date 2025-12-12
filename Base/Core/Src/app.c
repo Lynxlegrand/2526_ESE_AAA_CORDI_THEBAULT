@@ -8,6 +8,7 @@
 #include "app.h"
 #include "motor_control/motor.h"
 #include "user_interface/led.h"
+#include "acquisition/input_analog.h"
 
 #include "user_interface/shell.h"
 
@@ -20,6 +21,8 @@ void init_device(void){
 	hshell1.drv.receive = shell_uart2_receive;
 	shell_init(&hshell1);
 	HAL_UART_Receive_IT(&huart2, (uint8_t *)&shell_uart2_received_char, 1);
+
+	input_analog_init();
 
 	// LED
 	led_init();
