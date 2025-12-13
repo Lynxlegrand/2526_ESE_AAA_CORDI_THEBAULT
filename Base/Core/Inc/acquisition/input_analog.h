@@ -8,6 +8,6 @@
 #ifndef INC_INPUT_ANALOG_H_
 #define INC_INPUT_ANALOG_H_
 
-
-
+void input_analog_init(void);
+void ADC1_Calibrate(void);
 #endif /* INC_INPUT_ANALOG_H_ */

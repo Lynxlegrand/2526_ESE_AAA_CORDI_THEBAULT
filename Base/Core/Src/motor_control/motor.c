@@ -15,27 +15,78 @@ uint8_t pwm_duty = PWM_DUTY_INIT;
 // STATIC PROTOTYPES
 static uint32_t calc_duty(uint8_t percent);
 static int sh_set_ccr(h_shell_t* h_shell, int argc, char** argv);
+static int sh_start_pwm(h_shell_t* h_shell, int argc, char** argv);
+static int sh_stop_pwm(h_shell_t* h_shell, int argc, char** argv);
 
 
 // FUNCTIONS
 void motor_init(void){
 
+//	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+//	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+//	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1); // démarrer CH1N
+//	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2); // démarrer CH2N
+//
+//
+//	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, calc_duty(pwm_duty));
+//	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, ARR - calc_duty(pwm_duty));
+
+
+	shell_add(&hshell1, "setCRR", sh_set_ccr, "Set PWM duty cycle (0-100%)");
+	shell_add(&hshell1, "start", sh_start_pwm, "Start MCC's PWM and set CCR to 50%");
+	shell_add(&hshell1, "stop", sh_stop_pwm, "Stop MCC's PWM and set CCR to 50%");
+
+
+}
+
+static int sh_start_pwm(h_shell_t* h_shell, int argc, char** argv)
+{
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1); // démarrer CH1N
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2); // démarrer CH2N
 
+	pwm_duty = 50;
 
 	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, calc_duty(pwm_duty));
 	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, ARR - calc_duty(pwm_duty));
 
+    int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+                        "PWM started\r\n");
+    h_shell->drv.transmit(h_shell->print_buffer, size);
 
-	shell_add(&hshell1, "setCRR", sh_set_ccr, "Set PWM duty cycle (0-100%)");
+    size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+                        "MCC started, CRR = 50 percent\r\n");
+    h_shell->drv.transmit(h_shell->print_buffer, size);
 
 
+	return 0;
 }
 
 
+static int sh_stop_pwm(h_shell_t* h_shell, int argc, char** argv)
+{
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
+	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1); // démarrer CH1N
+	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_2); // démarrer CH2N
+
+	pwm_duty = 50;
+
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, calc_duty(pwm_duty));
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, ARR - calc_duty(pwm_duty));
+
+    int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+                        "PWM stopped\r\n");
+    h_shell->drv.transmit(h_shell->print_buffer, size);
+
+    size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+                        "MCC stopped, CRR = 50 percent\r\n");
+    h_shell->drv.transmit(h_shell->print_buffer, size);
+
+
+	return 0;
+}
 
 static int sh_set_ccr(h_shell_t* h_shell, int argc, char** argv) {
     if (argc != 2) {
